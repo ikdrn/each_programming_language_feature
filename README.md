@@ -1,82 +1,82 @@
-# Technology Stack Comparison & Benchmark Suite
+# 技術スタック比較 & ベンチマークスイート
 
-A comprehensive comparison and benchmarking suite for modern web development technologies including Frontend frameworks, Backend languages/frameworks, and Databases.
+フロントエンドフレームワーク、バックエンド言語・フレームワーク、データベースなど、最新のWeb開発技術を包括的に比較・ベンチマークするスイートです。
 
-## Overview
+## 概要
 
-This project provides:
-- **Code samples** for popular technologies (React, Vue.js, Svelte, Node.js, Go, Python, Express, Gin, FastAPI)
-- **Docker Compose setup** for easy testing and comparison
-- **Load testing scripts** using k6 for performance benchmarking
-- **Comprehensive comparison documentation** (COMPARISON.md)
+このプロジェクトは以下を提供します:
+- **コードサンプル** (React, Vue.js, Svelte, Node.js, Go, Python, Express, Gin, FastAPI)
+- **Docker Compose セットアップ** で簡単にテスト・比較可能
+- **k6 による負荷テストスクリプト** でパフォーマンスベンチマーク実施
+- **詳細な比較資料** (COMPARISON.md)
 
-## Project Structure
+## プロジェクト構造
 
 ```
 .
 ├── frontend/
-│   ├── react/              # React sample (Hello World + API consumption)
-│   ├── vue/                # Vue.js sample
-│   └── svelte/             # Svelte sample
+│   ├── react/              # Reactサンプル (Hello World + API呼び出し)
+│   ├── vue/                # Vue.jsサンプル
+│   └── svelte/             # Svelteサンプル
 ├── backend/
 │   ├── node-express/       # Node.js + Express API
 │   ├── go-gin/             # Go + Gin API
 │   └── python-fastapi/     # Python + FastAPI
 ├── k6/
-│   └── load-test.js        # Load testing script
-├── docker-compose.yml      # Docker Compose configuration
-├── COMPARISON.md           # Detailed technology comparison
-└── README.md               # This file
+│   └── load-test.js        # 負荷テストスクリプト
+├── docker-compose.yml      # Docker Compose設定
+├── COMPARISON.md           # 技術比較資料
+└── README.md               # このファイル
 ```
 
-## Quick Start
+## クイックスタート
 
-### Prerequisites
-- Docker and Docker Compose installed
-- k6 (optional, for local testing)
+### 前提条件
+- Docker と Docker Compose がインストール済み
+- k6 (オプション、ローカルテスト用)
 
-### Running the Services
+### サービスの起動
 
 ```bash
-# Build and start all services
+# 全サービスをビルド・起動
 docker-compose up -d
 
-# Check service status
+# サービスステータス確認
 docker-compose ps
 
-# View logs
+# ログを表示
 docker-compose logs -f
 
-# Test endpoints
+# エンドポイントをテスト
 curl http://localhost:3001/api/hello  # Node.js + Express
 curl http://localhost:3002/api/hello  # Go + Gin
 curl http://localhost:3003/api/hello  # Python + FastAPI
 ```
 
-### Running Load Tests
+### 負荷テストの実行
 
 ```bash
-# Using Docker Compose
+# Docker Composeで実行
 docker-compose run k6 run /scripts/load-test.js
 
-# Or locally (if k6 installed)
+# またはローカルで実行 (k6がインストール済みの場合)
 k6 run k6/load-test.js
 ```
 
-### Stopping Services
+### サービスの停止
 
 ```bash
 docker-compose down
 ```
 
-## API Endpoints
+## APIエンドポイント
 
-All services implement the same API interface:
+全サービスで同じAPIインターフェースを実装しています:
 
 ### GET /api/hello
-Returns a greeting message with timestamp
+タイムスタンプ付きのグリーティングメッセージを返す
 
-**Response:**
+**レスポンス:**
 ```json
 {
   "message": "Hello from [Framework]",
@@ -86,9 +86,9 @@ Returns a greeting message with timestamp
 ```
 
 ### GET /api/data
-Returns 100 sample data items
+100個のサンプルデータアイテムを返す
 
-**Response:**
+**レスポンス:**
 ```json
 {
   "data": [
@@ -102,164 +102,164 @@ Returns 100 sample data items
 ```
 
 ### POST /api/echo
-Echoes back the posted data
+ポストされたデータをエコーバックする
 
-**Request:**
+**リクエスト:**
 ```json
 {
-  "message": "Your message here"
+  "message": "メッセージ内容"
 }
 ```
 
-**Response:**
+**レスポンス:**
 ```json
 {
   "echo": {
-    "message": "Your message here"
+    "message": "メッセージ内容"
   },
   "received": "2025-01-27T12:00:00.000Z"
 }
 ```
 
-## Database Connectivity
+## データベース接続
 
-The Docker Compose setup includes three databases:
+Docker Compose セットアップには 3 つのデータベースが含まれています:
 
 ### PostgreSQL
-- **Host**: localhost:5432
-- **Username**: benchuser
-- **Password**: benchpass
-- **Database**: benchmark_db
+- **ホスト**: localhost:5432
+- **ユーザー名**: benchuser
+- **パスワード**: benchpass
+- **データベース**: benchmark_db
 
 ```bash
-# Connect
+# 接続
 psql -h localhost -U benchuser -d benchmark_db
 ```
 
 ### MongoDB
-- **Host**: localhost:27017
-- **Username**: benchuser
-- **Password**: benchpass
-- **Database**: benchmark_db
+- **ホスト**: localhost:27017
+- **ユーザー名**: benchuser
+- **パスワード**: benchpass
+- **データベース**: benchmark_db
 
 ```bash
-# Connect
+# 接続
 mongosh "mongodb://benchuser:benchpass@localhost:27017/benchmark_db"
 ```
 
 ### Redis
-- **Host**: localhost:6379
-- **No authentication** (default setup)
+- **ホスト**: localhost:6379
+- **認証**: なし (デフォルト設定)
 
 ```bash
-# Connect
+# 接続
 redis-cli -h localhost
 ```
 
-## Performance Comparison
+## パフォーマンス比較
 
-See [COMPARISON.md](./COMPARISON.md) for detailed performance metrics, DX comparison, and recommendations.
+詳細なパフォーマンス指標、DX比較、推奨事項については [COMPARISON.md](./COMPARISON.md) を参照してください。
 
-### Quick Summary
-| Framework | Avg Response | RPS | Memory |
-|-----------|-------------|-----|--------|
+### クイック比較
+| フレームワーク | 平均応答時間 | RPS | メモリ |
+|-------------|-----------|-----|--------|
 | Go + Gin | ~2ms | 3,500+ | ~30MB |
 | Node.js + Express | ~8ms | 1,800+ | ~120MB |
 | Python + FastAPI | ~12ms | 1,200+ | ~90MB |
 
-## Technology Details
+## 技術詳細
 
-### Frontend
-- **React**: Component-based UI library
-- **Vue.js**: Progressive framework with reactive data binding
-- **Svelte**: Compiler-based framework with minimal runtime
+### フロントエンド
+- **React**: コンポーネントベースのUIライブラリ
+- **Vue.js**: リアクティブなデータバインディングを備えたプログレッシブフレームワーク
+- **Svelte**: 最小限のランタイムでコンパイルするフレームワーク
 
-### Backend Languages
-- **Node.js**: JavaScript runtime with non-blocking I/O
-- **Go**: Compiled language with built-in concurrency
-- **Python**: Interpreted language with excellent ecosystem
+### バックエンド言語
+- **Node.js**: ノンブロッキングI/Oを備えたJavaScriptランタイム
+- **Go**: 組み込み並行処理を備えたコンパイル言語
+- **Python**: 優れたエコシステムを備えたインタプリタ言語
 
-### Backend Frameworks
-- **Express**: Minimalist web framework for Node.js
-- **Gin**: Fast and lightweight web framework for Go
-- **FastAPI**: Modern async web framework for Python
+### バックエンドフレームワーク
+- **Express**: Node.js用のミニマリストWebフレームワーク
+- **Gin**: Go用の高速で軽量なWebフレームワーク
+- **FastAPI**: Python用の最新非同期Webフレームワーク
 
-### Databases
-- **PostgreSQL**: Powerful RDBMS with advanced features
-- **MongoDB**: Flexible NoSQL document database
-- **Redis**: In-memory data store for caching and sessions
+### データベース
+- **PostgreSQL**: 高度な機能を備えた強力なRDBMS
+- **MongoDB**: 柔軟なスキーマを備えたNoSQL文書データベース
+- **Redis**: キャッシングとセッション管理用のインメモリデータストア
 
-## Development Tips
+## 開発Tips
 
-### Adding a New Backend Framework
-1. Create directory: `backend/[lang]-[framework]/`
-2. Implement API endpoints matching the interface
-3. Create Dockerfile
-4. Add service to docker-compose.yml
-5. Update k6 load test scripts
+### 新しいバックエンドフレームワークを追加する
+1. ディレクトリを作成: `backend/[lang]-[framework]/`
+2. APIインターフェースに合わせたエンドポイントを実装
+3. Dockerfile を作成
+4. docker-compose.yml にサービスを追加
+5. k6 ロードテストスクリプトを更新
 
-### Modifying Load Tests
-Edit `k6/load-test.js` to:
-- Change VU (Virtual Users) count
-- Adjust test duration
-- Add new endpoints to test
-- Modify thresholds
+### ロードテストを変更する
+`k6/load-test.js` を編集して:
+- VU (仮想ユーザー) の数を変更
+- テスト期間を調整
+- テスト対象の新しいエンドポイントを追加
+- 閾値を変更
 
-### Viewing Benchmark Results
+### ベンチマーク結果を確認する
 ```bash
-# Extract results
+# 結果を抽出
 docker cp bench_k6:/app/results/results.json ./results.json
 
-# View in JSON format
+# JSON形式で表示
 cat results.json
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
-### Services won't start
+### サービスが起動しない場合
 ```bash
-# Clear containers and try again
+# コンテナをクリアして再度実行
 docker-compose down -v
 docker-compose up -d
 ```
 
-### Port conflicts
-Modify port mappings in `docker-compose.yml`:
+### ポート競合が発生した場合
+`docker-compose.yml` でポートマッピングを変更:
 ```yaml
 ports:
-  - "3001:3000"  # Change first number to unused port
+  - "3001:3000"  # 最初の数字を未使用ポートに変更
 ```
 
-### Database connection issues
-- Ensure services are healthy: `docker-compose ps`
-- Check logs: `docker-compose logs [service-name]`
-- Verify network: `docker-compose exec [service] ping [other-service]`
+### データベース接続エラーが発生した場合
+- サービスが健全な状態か確認: `docker-compose ps`
+- ログを確認: `docker-compose logs [service-name]`
+- ネットワーク接続を確認: `docker-compose exec [service] ping [other-service]`
 
-## Contributing
+## 貢献
 
-Contributions welcome! Please:
-1. Follow existing code style
-2. Test locally before submitting
-3. Update documentation
-4. Add benchmarks for new technologies
+貢献を歓迎します。以下のルールに従ってください:
+1. 既存のコードスタイルに従う
+2. 提出前にローカルでテスト
+3. ドキュメントを更新
+4. 新しい技術のベンチマークを追加
 
-## License
+## ライセンス
 
-MIT License - See LICENSE file for details
+MIT ライセンス - 詳細は LICENSE ファイルを参照
 
-## Resources
+## リソース
 
-- [React Documentation](https://react.dev)
-- [Vue.js Documentation](https://vuejs.org)
-- [Svelte Documentation](https://svelte.dev)
-- [Node.js Documentation](https://nodejs.org)
-- [Go Documentation](https://golang.org/doc)
-- [Python Documentation](https://python.org/doc)
-- [Express Documentation](https://expressjs.com)
-- [Gin Documentation](https://gin-gonic.com)
-- [FastAPI Documentation](https://fastapi.tiangolo.com)
-- [k6 Documentation](https://k6.io/docs)
+- [React ドキュメント](https://react.dev)
+- [Vue.js ドキュメント](https://vuejs.org)
+- [Svelte ドキュメント](https://svelte.dev)
+- [Node.js ドキュメント](https://nodejs.org)
+- [Go ドキュメント](https://golang.org/doc)
+- [Python ドキュメント](https://python.org/doc)
+- [Express ドキュメント](https://expressjs.com)
+- [Gin ドキュメント](https://gin-gonic.com)
+- [FastAPI ドキュメント](https://fastapi.tiangolo.com)
+- [k6 ドキュメント](https://k6.io/docs)
 
 ---
 
-**Last Updated**: January 2025
+**最終更新**: 2025年1月
