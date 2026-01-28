@@ -1,0 +1,19 @@
+{
+  "name": "svelte-frontend",
+  "version": "1.0.0",
+  "description": "Svelte technology stack comparison",
+  "private": true,
+  "dependencies": {
+    "svelte": "^4.2.0",
+    "axios": "^1.6.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "vite": "^5.0.0"
+  }
+}
