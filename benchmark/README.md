@@ -1,53 +1,53 @@
-# Technology Stack Benchmark Suite
+# テクノロジースタック ベンチマークスイート
 
-Load testing scripts using k6 for comparing performance across different technology stacks.
+異なるテクノロジースタック間のパフォーマンス比較用k6ロードテストスクリプト。
 
-## Prerequisites
+## 前提条件
 
-- k6 must be installed on your system
-- All backend services must be running (use Docker Compose)
+- k6がシステムにインストールされていること
+- すべてのバックエンドサービスが実行されていること（Docker Composeを使用）
 
-## Running Benchmarks
+## ベンチマークの実行
 
-### Start all services
+### すべてのサービスを開始
 
 ```bash
 docker-compose up -d
 ```
 
-### Run comparison benchmark
+### 比較ベンチマークを実行
 
-This script runs a single benchmark test (1000 insertions) on each service:
+このスクリプトは各サービスで単一のベンチマークテスト（1000項目のINSERT）を実行します：
 
 ```bash
 k6 run benchmark/comparison.js
 ```
 
-Output will show duration in milliseconds and requests per second (RPS) for each implementation.
+出力には各実装の実行時間（ミリ秒）とリクエスト/秒（RPS）が表示されます。
 
-### Run load test
+### ロードテストを実行
 
-This script performs a ramping load test across all services:
+このスクリプトはすべてのサービス上で段階的なロードテストを実行します：
 
 ```bash
 k6 run benchmark/load-test.js
 ```
 
-The test ramps up to 10 concurrent users over 30 seconds, maintains that load for 1.5 minutes, then ramps down.
+このテストは30秒で10の同時ユーザーまで増加し、1.5分その負荷を維持してから減少します。
 
-## Available Test Endpoints
+## 利用可能なテストエンドポイント
 
-All services implement the following endpoints:
+すべてのサービスは以下のエンドポイントを実装します：
 
-- `GET /` - Health check
-- `GET /users` - Get all users
-- `POST /users` - Create user
-- `GET /users/:id` - Get specific user
-- `PUT /users/:id` - Update user
-- `DELETE /users/:id` - Delete user
-- `POST /benchmark` - Run benchmark (default 1000 insertions)
+- `GET /` - ヘルスチェック
+- `GET /users` - すべてのユーザーを取得
+- `POST /users` - ユーザーを作成
+- `GET /users/:id` - 特定のユーザーを取得
+- `PUT /users/:id` - ユーザーを更新
+- `DELETE /users/:id` - ユーザーを削除
+- `POST /benchmark` - ベンチマークを実行（デフォルト1000項目のINSERT）
 
-## Services and Ports
+## サービスとポート
 
 ### Node.js
 - Vanilla: 3001

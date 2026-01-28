@@ -39,14 +39,14 @@ const services = [
 export default function () {
   services.forEach(service => {
     group(`${service.name}`, function () {
-      // Health check
+      // ヘルスチェック
       let healthRes = http.get(`${service.url}/`);
       check(healthRes, {
-        'health status is 200': (r) => r.status === 200,
-        'health response has message': (r) => r.body.includes('status'),
+        'ヘルスチェックステータスが200': (r) => r.status === 200,
+        'ヘルスチェックレスポンスにメッセージがある': (r) => r.body.includes('status'),
       });
 
-      // Create user
+      // ユーザー作成
       let createRes = http.post(
         `${service.url}/users`,
         JSON.stringify({
@@ -59,19 +59,19 @@ export default function () {
         }
       );
       check(createRes, {
-        'create user status is 201 or 200': (r) => r.status === 201 || r.status === 200,
-        'create user response has success': (r) => r.body.includes('success'),
-        'create user has data': (r) => r.body.includes('data'),
+        'ユーザー作成ステータスが201か200': (r) => r.status === 201 || r.status === 200,
+        'ユーザー作成レスポンスにsuccessがある': (r) => r.body.includes('success'),
+        'ユーザー作成にdataがある': (r) => r.body.includes('data'),
       });
 
-      // Get all users
+      // すべてのユーザーを取得
       let getAllRes = http.get(`${service.url}/users`);
       check(getAllRes, {
-        'get all users status is 200': (r) => r.status === 200,
-        'get all users has count': (r) => r.body.includes('count'),
+        'すべてのユーザー取得ステータスが200': (r) => r.status === 200,
+        'すべてのユーザー取得にcountがある': (r) => r.body.includes('count'),
       });
 
-      // Benchmark
+      // ベンチマーク
       let benchmarkRes = http.post(
         `${service.url}/benchmark`,
         JSON.stringify({ count: 100 }),
@@ -80,9 +80,9 @@ export default function () {
         }
       );
       check(benchmarkRes, {
-        'benchmark status is 200': (r) => r.status === 200,
-        'benchmark has result': (r) => r.body.includes('benchmark'),
-        'benchmark has performance': (r) => r.body.includes('performance'),
+        'ベンチマークステータスが200': (r) => r.status === 200,
+        'ベンチマークに結果がある': (r) => r.body.includes('benchmark'),
+        'ベンチマークにパフォーマンスがある': (r) => r.body.includes('performance'),
       });
 
       sleep(0.1);

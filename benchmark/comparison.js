@@ -32,8 +32,8 @@ const services = [
 
 export default function () {
   services.forEach(service => {
-    group(`Benchmark: ${service.name}`, function () {
-      // Run benchmark with 1000 insertions
+    group(`ベンチマーク: ${service.name}`, function () {
+      // 1000項目のINSERTでベンチマークを実行
       let benchmarkRes = http.post(
         `${service.url}/benchmark`,
         JSON.stringify({ count: 1000 }),
@@ -44,8 +44,8 @@ export default function () {
       );
 
       let success = check(benchmarkRes, {
-        'status is 200': (r) => r.status === 200,
-        'has benchmark data': (r) => r.body.includes('durationMs'),
+        'ステータスが200': (r) => r.status === 200,
+        'ベンチマークデータがある': (r) => r.body.includes('durationMs'),
       });
 
       errorRate.add(!success);
@@ -55,12 +55,12 @@ export default function () {
           let response = JSON.parse(benchmarkRes.body);
           if (response.benchmark) {
             console.log(`${service.name}:
-              Duration: ${response.benchmark.durationMs}ms
+              実行時間: ${response.benchmark.durationMs}ms
               RPS: ${response.benchmark.rps}
-              Count: ${response.benchmark.count}`);
+              件数: ${response.benchmark.count}`);
           }
         } catch (e) {
-          console.error(`Failed to parse response from ${service.name}`);
+          console.error(`${service.name}からのレスポンスをパースできませんでした`);
         }
       }
     });
