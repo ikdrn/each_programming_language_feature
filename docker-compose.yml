@@ -1,0 +1,163 @@
+version: '3.9'
+
+services:
+  # Node.js implementations
+  node-vanilla:
+    build:
+      context: ./backend/node/vanilla
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+    networks:
+      - tech-stack
+
+  node-express:
+    build:
+      context: ./backend/node/express
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+    networks:
+      - tech-stack
+
+  node-hono:
+    build:
+      context: ./backend/node/hono
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+    networks:
+      - tech-stack
+
+  # Go implementations
+  go-vanilla:
+    build:
+      context: ./backend/go/vanilla
+    ports:
+      - "4001:4001"
+    networks:
+      - tech-stack
+
+  go-gin:
+    build:
+      context: ./backend/go/gin
+    ports:
+      - "4002:4002"
+    networks:
+      - tech-stack
+
+  go-echo:
+    build:
+      context: ./backend/go/echo
+    ports:
+      - "4003:4003"
+    networks:
+      - tech-stack
+
+  # Rust implementations
+  rust-vanilla:
+    build:
+      context: ./backend/rust/vanilla
+    ports:
+      - "5001:5001"
+    networks:
+      - tech-stack
+
+  rust-axum:
+    build:
+      context: ./backend/rust/axum
+    ports:
+      - "5002:5002"
+    networks:
+      - tech-stack
+
+  rust-actix-web:
+    build:
+      context: ./backend/rust/actix-web
+    ports:
+      - "5003:5003"
+    networks:
+      - tech-stack
+
+  # Python implementations
+  python-vanilla:
+    build:
+      context: ./backend/python/vanilla
+    ports:
+      - "6001:6001"
+    networks:
+      - tech-stack
+
+  python-fastapi:
+    build:
+      context: ./backend/python/fastapi
+    ports:
+      - "6002:6002"
+    networks:
+      - tech-stack
+
+  python-django:
+    build:
+      context: ./backend/python/django
+    ports:
+      - "6003:6003"
+    networks:
+      - tech-stack
+
+  # PHP implementations
+  php-vanilla:
+    build:
+      context: ./backend/php/vanilla
+    ports:
+      - "7001:7001"
+    networks:
+      - tech-stack
+
+  php-laravel:
+    build:
+      context: ./backend/php/laravel
+    ports:
+      - "7002:7002"
+    networks:
+      - tech-stack
+
+  # Java implementations
+  java-vanilla:
+    build:
+      context: ./backend/java/vanilla
+    ports:
+      - "8001:8001"
+    networks:
+      - tech-stack
+
+  java-springboot:
+    build:
+      context: ./backend/java/springboot
+    ports:
+      - "8002:8002"
+    networks:
+      - tech-stack
+
+  # Ruby implementations
+  ruby-vanilla:
+    build:
+      context: ./backend/ruby/vanilla
+    ports:
+      - "9001:9001"
+    networks:
+      - tech-stack
+
+  ruby-rails:
+    build:
+      context: ./backend/ruby/rails
+    ports:
+      - "9002:9002"
+    networks:
+      - tech-stack
+
+networks:
+  tech-stack:
+    driver: bridge
